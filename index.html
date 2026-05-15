@@ -1,0 +1,910 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREMIUM SCRIPTS | EXECUTOR</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+        
+        :root {
+            --bg-dark: #000000;
+            --card-bg: rgba(10, 10, 15, 0.95);
+            --text-light: #00ff00;
+            --delta-red: #ff0033;
+            --script-green: #00ff88;
+            --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor;
+            --cyber-border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+            padding: 20px 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 51, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.03) 0%, transparent 25%);
+        }
+        
+        .container {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+            width: 90%;
+            max-width: 900px;
+            border: var(--cyber-border);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, 
+                    transparent, 
+                    rgba(0, 255, 136, 0.05) 50%, 
+                    transparent),
+                linear-gradient(0deg, 
+                    transparent, 
+                    rgba(255, 0, 51, 0.05) 50%, 
+                    transparent);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        h1 {
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--delta-red);
+            text-shadow: var(--neon-glow);
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: var(--script-green);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 1.4rem 0;
+            border: none;
+            border-radius: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.6s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-android {
+            color: var(--script-green);
+            border: 1px solid var(--script-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.2);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            filter: brightness(0.9);
+        }
+        
+        .platform-tag {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            text-shadow: var(--neon-glow);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 136, 0.03),
+                rgba(0, 255, 136, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glitch-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.1"/></svg>');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .scripts-container {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .script-item {
+            background: rgba(5, 5, 10, 0.8);
+            border: var(--cyber-border);
+            padding: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+        
+        .script-title {
+            color: var(--delta-red);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 0, 51, 0.7);
+        }
+        
+        .code-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-bottom: 1rem;
+            position: relative;
+            max-height: 150px;
+            overflow-y: auto;
+            transition: all 0.5s ease;
+        }
+        
+        .code-box.blurred {
+            filter: blur(12px);
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .code-box.blurred:hover {
+            filter: blur(8px);
+        }
+        
+        .code-box.blurred::after {
+            content: 'CLICK TO REVEAL SCRIPT';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--script-green);
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border: 2px solid var(--script-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            z-index: 2;
+            text-align: center;
+            width: 80%;
+        }
+        
+        .code-box.blurred::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 255, 136, 0.1) 50%,
+                transparent 70%
+            );
+            background-size: 200% 200%;
+            animation: shimmer 3s infinite linear;
+            z-index: 1;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% -200%; }
+            100% { background-position: 200% 200%; }
+        }
+        
+        .copy-btn {
+            background: var(--delta-red);
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn:hover {
+            background: #ff3366;
+            box-shadow: 0 0 15px var(--delta-red);
+        }
+        
+        .copy-btn.copied {
+            background: var(--script-green);
+            color: black;
+        }
+        
+        .copy-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .executor-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: var(--cyber-border);
+        }
+        
+        .executor-title {
+            color: var(--script-green);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+        }
+        
+        .instructions {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: var(--cyber-border);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .instructions-title {
+            color: var(--delta-red);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .step {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: var(--delta-red);
+            color: black;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        .protection-notice {
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--delta-red);
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff9999;
+        }
+        
+        .search-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: var(--cyber-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--text-light);
+            font-family: 'Orbitron', sans-serif;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        
+        .search-box::placeholder {
+            color: rgba(0, 255, 136, 0.5);
+        }
+
+
+        .game-section-header {
+            color: var(--delta-red);
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin: 2.5rem 0 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--neon-glow);
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .game-section-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .script-item.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="glitch-effect"></div>
+    
+    <div class="container">
+        <h1>CONGRATULATIONS!</h1>
+        <div class="subtitle">YOU UNLOCKED THE SCRIPTS! NOW DOWNLOAD MY PREMIUM EXECUTOR THAT I USE IN MY VIDEOS NEVER GOT ME BANNED!</div>
+        
+        <div class="executor-section">
+            <div class="executor-title">DOWNLOAD PREMIUM EXECUTOR</div>
+            
+            <div class="button-container">
+                <a href="https://delta.bz/" class="btn btn-android">
+                    PREMIUM CUSTOM EXECUTOR
+                    <div class="platform-tag">ANDROID/IOS KEYLESS</div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <div class="instructions-title">HOW TO USE:</div>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Download and install the premium executor above</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Click on any blurred script box below to reveal the code</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Copy the script by clicking the "Copy To Clipboard" button</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>Paste the script into your executor and enjoy!</div>
+            </div>
+        </div>
+        
+        
+        <input type="text" class="search-box" placeholder="🔍 SEARCH SCRIPTS..." onkeyup="searchScripts(this.value)">
+        
+        <div class="protection-notice">
+            ⚠️ SCRIPTS PROTECTED - CLICK TO REVEAL ⚠️
+        </div>
+        
+        <div class="scripts-container" id="scriptsContainer">
+        <h2 class="game-section-header">STEAL A BRAINROT</h2>
+            <div class="script-item">
+                <div class="script-title">1. FREEZE TRADE SCRIPT</div>
+                <div class="code-box blurred" id="sab-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastefy.app/DdqmAYYX/raw"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script1', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">2. INSTANT STEAL + TP FORWARD SCRIPT</div>
+                <div class="code-box blurred" id="sab-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/sabscript-lua/sab/refs/heads/main/lua.lua"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script2', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">3. LAGGER SCRIPT</div>
+                <div class="code-box blurred" id="sab-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/zzzhubv2/desyncv2/refs/heads/main/loader"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script3', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">4. TP TO BASE SCRIPT</div>
+                <div class="code-box blurred" id="sab-script4" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastefy.app/JJVhs3rK/raw"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script4', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">5. STACKED SERVERS FINDER SCRIPT</div>
+                <div class="code-box blurred" id="sab-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/kdmlv2/Instantsteal/refs/heads/main/loader"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script5', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">6. DUPE BRAINROTS SCRIPT</div>
+                <div class="code-box blurred" id="sab-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/INF-Hub-PL/StealaBrainrotScriptLibrary/refs/heads/main/Auto-Moreira"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script6', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">7. BAT ENHANCER SCRIPT</div>
+                <div class="code-box blurred" id="sab-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/khanghay063-glitch/Crash/refs/heads/main/keyui.lua"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script7', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">8. 99X LUCK SCRIPT</div>
+                <div class="code-box blurred" id="sab-script8" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/ac88f99f2b292242281d052a71f08a70.lua"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script8', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">9. KICKER SCRIPT</div>
+                <div class="code-box blurred" id="sab-script9" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/DeltaScriptsV2/SabScriptsV3/refs/heads/main/ZZZZHUB"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script9', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">10. CRASHER SCRIPT</div>
+                <div class="code-box blurred" id="sab-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastefy.app/vbzevHSi/raw"))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script10', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+            <div class="script-item">
+                <div class="script-title">11. ANTI SCAM SCRIPT</div>
+                <div class="code-box blurred" id="sab-script11" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/53325754de16c11fbf8bf78101c1c881.lua", true))()</div>
+                <button class="copy-btn" onclick="copyToClipboard('sab-script11', this)" disabled="">COPY TO CLIPBOARD (REVEAL FIRST)</button>
+            </div>
+        <h2 class="game-section-header">ADOPT ME</h2>
+            <div class="script-item">
+        <div class="script-title">1. PET SPAWNER SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/INF-Hub-PL/AdoptMeSpawner/refs/heads/main/PetSpawner"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. INSTANT HATCH SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/777b801ad964338eeddcfa72c5fedcf58faa22dbcb93e9f93b8acb79fe6630de/download"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. FREEZE TRADE SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/jazzedd/JazradScript/refs/heads/main/Script"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. AUTO FARM SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script4" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/bS93UtUs"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. EVENT FARM SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/r4mpage4/LuaCom/refs/heads/main/r4mpage.gay"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. AUTO PET SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Ragesploit-x/Ragesploit/refs/heads/main/MainScript/ShitVersion.lua"))();</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. AUTO EQUIP SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/eeeiqjj876y/adoptme.github.io/refs/heads/main/ringta.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. PETS FARM SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script8" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Muhammad6196/Project-Infinity-X/refs/heads/main/main.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">9. TELEPORT SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script9" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/DFnCnLBx", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script9', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">10. ESP SCRIPT</div>
+        <div class="code-box blurred" id="adopt-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/loader.lua", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('adopt-script10', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        <h2 class="game-section-header">BROOKHAVEN</h2>
+            <div class="script-item">
+        <div class="script-title">1. ADMIN SCRIPT</div>
+        <div class="code-box blurred" id="brook-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/as6cd0/SP_Hub/refs/heads/main/Brookhaven"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. TROLL SCRIPT</div>
+        <div class="code-box blurred" id="brook-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/EYs5T7Yg",true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. FLY SCRIPT</div>
+        <div class="code-box blurred" id="brook-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/mikeexc/Dsc-Mike-Fly-Gui/main/Fly%20Gui"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. UNLOCK ALL GAMEPASS SCRIPT</div>
+        <div class="code-box blurred" id="brook-script4" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/RFRR1CH4RD/Loader/main/Salvatore.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. KILL ALL SCRIPT</div>
+        <div class="code-box blurred" id="brook-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/ScriptBrv/BROKEY/refs/heads/main/BROKEY.md",true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. KICK ALL SCRIPT</div>
+        <div class="code-box blurred" id="brook-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/rogelioajax/lua/main/MangoHub", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. NUKE SERVER SCRIPT</div>
+        <div class="code-box blurred" id="brook-script7" onclick="revealScript(this)">loadstring(game:HttpGet('https://raw.githubusercontent.com/Jfdedit3/z4trox-hub-v1/main/z4trox%20hub'))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. DRIFT SCRIPT</div>
+        <div class="code-box blurred" id="brook-script8" onclick="revealScript(this)">
+local Players = game:GetService("Players") 
+local Workspace = game:GetService("Workspace")
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui", player.PlayerGui)
+gui.ResetOnSpawn = false
+local button = Instance.new("TextButton", gui)
+button.Size = UDim2.new(0, 135, 0, 50)
+button.Position = UDim2.new(1, -185, 0.5, -25)
+button.Text = "Drift Mode by Felix: OFF"
+button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+button.TextColor3 = Color3.new(1, 1, 1)
+button.TextScaled = true
+button.BorderSizePixel = 0
+button.AutoButtonColor = true
+local normalGravity = 196.2
+local lowGravity = 50
+local enabled = false
+button.MouseButton1Click:Connect(function()
+enabled = not enabled
+Workspace.Gravity = enabled and lowGravity or normalGravity
+button.Text = enabled and "Drift Mode by Felix: ON" or "Drift Mode by Felix: OFF"
+end)
+        </div>
+        <button class="copy-btn" onclick="copyToClipboard('brook-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        <h2 class="game-section-header">RIVALS</h2>
+            <div class="script-item">
+        <div class="script-title">1. AIMBOT SCRIPT</div>
+        <div class="code-box blurred" id="rival-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/2529a5f9dfddd5523ca4e22f21cceffa.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. SILENT AIM SCRIPT</div>
+        <div class="code-box blurred" id="rival-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/JNHHGaming/Rivals-Script/refs/heads/main/JN%20HH%20Gaming",true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. RAGEBOT SCRIPT</div>
+        <div class="code-box blurred" id="rival-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/5946add9ab91f1e04cb005346a8b1968.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. ESP SCRIPT</div>
+        <div class="code-box blurred" id="rival-script4" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/tokyotokyo-dev/rivals/refs/heads/main/rivalsaimwh.lua", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. LEGITBOT SCRIPT</div>
+        <div class="code-box blurred" id="rival-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/main.luau"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. TRIGGERBOT SCRIPT</div>
+        <div class="code-box blurred" id="rival-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/10cxm/loader/refs/heads/main/src"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. WALLHACK SCRIPT</div>
+        <div class="code-box blurred" id="rival-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastefy.app/YiGY38uo/raw"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. UNLOCK ALL SKINS</div>
+        <div class="code-box blurred" id="rival-script8" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/devKing22/Skidded-ycyberx22/refs/heads/main/rivals"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">9. SKIN CHANGER SCRIPT</div>
+        <div class="code-box blurred" id="rival-script9" onclick="revealScript(this)">loadstring(game:HttpGet("http://luminon.top/loader.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script9', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">10. GOD MODE SCRIPT</div>
+        <div class="code-box blurred" id="rival-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://gist.githubusercontent.com/Conjacko/4b2e37b76c11013d807025c2d2f51f67/raw/c50f186b06dc111b34374c84b2a8ae0bbdc91208/gistfile1.txt"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('rival-script10', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        <h2 class="game-section-header">BLOX FRUITS</h2>
+            <div class="script-item">
+        <div class="script-title">1. TRADE FREEZE SCRIPT</div>
+        <div class="code-box blurred" id="bf-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/RubuRoblox/refs/heads/main/RubuBF"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. AUTO LEVEL SCRIPT</div>
+        <div class="code-box blurred" id="bf-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Dex-Bear/Vxezehub/refs/heads/main/VxezeHubMain"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. FRUIT FARM SCRIPT</div>
+        <div class="code-box blurred" id="bf-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Efe0626/RaitoHub/main/Script"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. CHEST FARM SCRIPT</div>
+        <div class="code-box blurred" id="bf-script4" onclick="revealScript(this)">_G.Team = "Marine"
+_G.MetodeTeleport = "Instant"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/refs/heads/main/Main/BloxFruit/Chest/AllDevices.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. BOSS FARM SCRIPT</div>
+        <div class="code-box blurred" id="bf-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. RAID FARM SCRIPT</div>
+        <div class="code-box blurred" id="bf-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. MAGNET SCRIPT</div>
+        <div class="code-box blurred" id="bf-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. TELEPORT SCRIPT</div>
+        <div class="code-box blurred" id="bf-script8" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Nghia11n/Banana-Hub/main/bananahub.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">9. FAST ATTACK SCRIPT</div>
+        <div class="code-box blurred" id="bf-script9" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Scriptztyz/robloxscript/refs/heads/main/ZetHubMainScript"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script9', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">10. KILL AURA SCRIPT</div>
+        <div class="code-box blurred" id="bf-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/Min/refs/heads/main/MinMasEng"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script10', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">11. AUTO FARM SCRIPT</div>
+        <div class="code-box blurred" id="bf-script11" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaCrack/RubuRoblox/refs/heads/main/RubuBF"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script11', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">12. MULTI FEATURE SCRIPT</div>
+        <div class="code-box blurred" id="bf-script12" onclick="revealScript(this)">loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/513ccdb3ae8a61d4d7698fc337e5256d.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script12', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">13. UNIVERSAL SCRIPT</div>
+        <div class="code-box blurred" id="bf-script13" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/AHg2NLqG"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script13', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">14. MAX HUB SCRIPT</div>
+        <div class="code-box blurred" id="bf-script14" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Jadelly261/BloxFruits/main/Aurora", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('bf-script14', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        <h2 class="game-section-header">MURDER MYSTERY 2</h2>
+            <div class="script-item">
+        <div class="script-title">1. AUTO FARM SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://lumin.rest/script"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. SILENT AIM SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/T9b5HSUC"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. AIMBOT SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/xv3gasx/Murder-Mystery-2/refs/heads/main/Release.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. KILL AURA SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script4" onclick="revealScript(this)">loadstring(game:HttpGet('https://raw.smokingscripts.org/vertex.lua'))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. AUTO SHOOT SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Azura83/Murder-Mystery-2/refs/heads/main/Script.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. WALLHACK ESP SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script6" onclick="revealScript(this)">loadstring(game:HttpGet('https://raw.githubusercontent.com/mm2scripthub/TravHub/refs/heads/main/MurderMystery2'))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. TELEPORT SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Revenge-Hub-Roblox/Scripts/refs/heads/main/mm2.lua", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. KILL MURDERER SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script8" onclick="revealScript(this)">loadstring(game:HttpGet('https://pastefy.app/wDoZyWIp/raw'))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">9. KILL ALL SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script9" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script9', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">10. XP FARM SCRIPT</div>
+        <div class="code-box blurred" id="mm2-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/ThatSick/HoneyLua/refs/heads/main/Loader.luau"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('mm2-script10', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        <h2 class="game-section-header">SAILOR PIECE</h2>
+            <div class="script-item">
+        <div class="script-title">1. AUTO FARM SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script1" onclick="revealScript(this)">loadstring(game:HttpGet("https://gitlab.com/phantomreal1/CopernixHub/-/raw/main/api.lua?ref_type=heads"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script1', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">2. GOD MODE SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script2" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/lostinnowheres/Loader/refs/heads/main/Loader.Lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script2', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">3. KILL AURA SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script3" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/HybridE3/HybridE3/refs/heads/main/Sailor%20Piece"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script3', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">4. INSTANT KILL SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script4" onclick="revealScript(this)">loadstring(game:HttpGet("https://pastebin.com/raw/M6NtAd4N", true))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script4', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">5. FAST ATTACK SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script5" onclick="revealScript(this)">loadstring(game:HttpGet("https://vss.pandadevelopment.net/virtual/file/2768ea6419cb4d73"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script5', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">6. TELEPORT SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script6" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/Sindex-Saliii/TrigonEvoHub/refs/heads/main/Main.luau"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script6', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">7. DUPE ITEMS SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script7" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/dusadeephenginx-sudo/roblox/main/uploads/sailor.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script7', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">8. MAX STATS SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script8" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/ZhangJunZ84/twvzyyds/refs/heads/main/sailorpiece.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script8', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">9. AUTO QUEST SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script9" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/BenJaMinZHub/Loader/refs/heads/main/GetKeyAllGame.lua"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script9', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+            <div class="script-item">
+        <div class="script-title">10. BOSS FARM SCRIPT</div>
+        <div class="code-box blurred" id="sailor-script10" onclick="revealScript(this)">loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()</div>
+        <button class="copy-btn" onclick="copyToClipboard('sailor-script10', this)" disabled>COPY TO CLIPBOARD (REVEAL FIRST)</button>
+    </div>
+        </div>
+    </div>
+
+    <script>
+        function revealScript(element) {
+            element.classList.remove('blurred');
+            const scriptId = element.id;
+            const button = element.nextElementSibling;
+            button.disabled = false;
+            button.textContent = 'COPY TO CLIPBOARD';
+        }
+
+        function copyToClipboard(scriptId, button) {
+            const scriptBox = document.getElementById(scriptId);
+            const text = scriptBox.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '✓ COPIED!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'COPY TO CLIPBOARD';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                button.textContent = 'FAILED TO COPY';
+                setTimeout(() => {
+                    button.textContent = 'COPY TO CLIPBOARD';
+                }, 2000);
+            });
+        }
+
+        function searchScripts(query) {
+            const scriptItems = document.querySelectorAll('.script-item');
+            const searchTerm = query.toLowerCase();
+            
+            scriptItems.forEach(item => {
+                const title = item.querySelector('.script-title').textContent.toLowerCase();
+                const code = item.querySelector('.code-box').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || code.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+
+
+</body></html>
